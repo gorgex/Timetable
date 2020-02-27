@@ -5,27 +5,27 @@ import android.os.Parcelable;
 
 public class Course implements Parcelable {
 
-    private String name, type, lecturer, from, to, auditorium;
+    private String title, type, lecturer, from, to, location;
 
     public Course() {
     }
 
-    public Course(String name, String type, String lecturer, String from, String to, String auditorium) {
-        this.name = name;
+    public Course(String title, String type, String lecturer, String from, String to, String location) {
+        this.title = title;
         this.type = type;
         this.lecturer = lecturer;
         this.from = from;
         this.to = to;
-        this.auditorium = auditorium;
+        this.location = location;
     }
 
-    Course(Parcel in) {
-        name = in.readString();
+    private Course(Parcel in) {
+        title = in.readString();
         type = in.readString();
         lecturer = in.readString();
         from = in.readString();
         to = in.readString();
-        auditorium = in.readString();
+        location = in.readString();
     }
 
     public static final Creator<Course> CREATOR = new Creator<Course>() {
@@ -40,12 +40,12 @@ public class Course implements Parcelable {
         }
     };
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getType() {
@@ -80,12 +80,12 @@ public class Course implements Parcelable {
         this.to = to;
     }
 
-    public String getAuditorium() {
-        return auditorium;
+    public String getLocation() {
+        return location;
     }
 
-    public void setAuditorium(String auditorium) {
-        this.auditorium = auditorium;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     @Override
@@ -95,11 +95,11 @@ public class Course implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
+        parcel.writeString(title);
         parcel.writeString(type);
         parcel.writeString(lecturer);
         parcel.writeString(from);
         parcel.writeString(to);
-        parcel.writeString(auditorium);
+        parcel.writeString(location);
     }
 }
