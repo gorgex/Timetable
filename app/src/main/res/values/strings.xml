@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Timetable</string>
     <string name="time">%1$s - %2$s</string>
+    <string name="sync">Sync</string>
 </resources>

@@ -21,8 +21,10 @@
             style="@style/TabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorPrimary"
+            android:clipToPadding="false"
+            android:paddingStart="5dp"
+            android:paddingEnd="0dp" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
