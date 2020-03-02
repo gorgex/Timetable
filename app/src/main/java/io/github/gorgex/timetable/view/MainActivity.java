@@ -2,6 +2,7 @@ package io.github.gorgex.timetable.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.Color;
@@ -16,10 +17,6 @@ import io.github.gorgex.timetable.adapters.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private ViewPagerAdapter viewPagerAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,27 +24,11 @@ public class MainActivity extends AppCompatActivity {
 
         setupToolbar();
 
-        viewPager = findViewById(R.id.viewPager);
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
-        tabLayout = findViewById(R.id.tabLayout);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
-
-        DayFragment monday = new DayFragment();
-        DayFragment tuesday = new DayFragment();
-        DayFragment wednesday = new DayFragment();
-        DayFragment thursday = new DayFragment();
-        DayFragment friday = new DayFragment();
-        DayFragment saturday = new DayFragment();
-        DayFragment sunday = new DayFragment();
-
-        viewPagerAdapter.addFragment(monday, "Monday");
-        viewPagerAdapter.addFragment(tuesday, "Tuesday");
-        viewPagerAdapter.addFragment(wednesday, "Wednesday");
-        viewPagerAdapter.addFragment(thursday, "Thursday");
-        viewPagerAdapter.addFragment(friday, "Friday");
-        viewPagerAdapter.addFragment(saturday, "Saturday");
-        viewPagerAdapter.addFragment(sunday, "Sunday");
 
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setCurrentItem(getCurrentDay());
@@ -64,10 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
     public int getCurrentDay() {
         Calendar calendar = Calendar.getInstance();
-        int day = 0;
+        int day;
 
         switch (calendar.get(Calendar.DAY_OF_WEEK)) {
             case Calendar.MONDAY:
+            default:
                 day = 0;
                 break;
             case Calendar.TUESDAY:
@@ -87,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case Calendar.SUNDAY:
                 day = 6;
-                break;
-            default:
                 break;
         }
 
