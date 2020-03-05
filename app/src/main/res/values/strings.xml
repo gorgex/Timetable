@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Timetable</string>
     <string name="time">%1$s - %2$s</string>
-    <string name="sync">Sync</string>
+    <string name="create">Create</string>
+    <string name="account">Account</string>
+    <string name="sign_out_of_timetable">Sign out of Timetable</string>
+    <string name="user_photo">userPhoto</string>
+    <string name="sign_in_to_your_google_account">Sign in to your Google account</string>
+    <string name="app_icon">appIcon</string>
 </resources>

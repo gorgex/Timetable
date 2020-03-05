@@ -25,6 +25,8 @@ public class DayFragment extends Fragment {
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private CollectionReference coursesRef = database.collection("courses");
 
+    private MainActivity mainActivity;
+
     private RecyclerViewAdapter recyclerViewAdapter;
 
     private String day;
@@ -53,6 +55,8 @@ public class DayFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_day, container, false);
 
+        mainActivity = (MainActivity) getContext();
+
         Query query = coursesRef.whereEqualTo("day", day).orderBy("from", Query.Direction.ASCENDING);
         FirestoreRecyclerOptions<Course> options = new FirestoreRecyclerOptions.Builder<Course>()
                 .setQuery(query, Course.class)
@@ -63,6 +67,18 @@ public class DayFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(recyclerViewAdapter);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    mainActivity.getFabInstance().shrink();
+                } else if (dy < 0) {
+                    mainActivity.getFabInstance().extend();
+                }
+            }
+        });
         return view;
     }
 
